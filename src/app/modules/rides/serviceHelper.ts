@@ -21,7 +21,7 @@ export const driverUpdateRide = async (
     throw new AppError(StatusCodes.NOT_FOUND, "Ride not found");
   }
 
-  if (!driver.isApproved) {
+  if (!driver.isApproved && !driver?.isAvailable) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
       "Please verify your account then... try again"
