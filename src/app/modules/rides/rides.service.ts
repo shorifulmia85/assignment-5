@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { StatusCodes } from "http-status-codes";
 import { AppError } from "../../errors/appError";
 import { getFare } from "../../utils/calculateFare";

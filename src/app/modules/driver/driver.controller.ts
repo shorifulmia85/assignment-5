@@ -14,4 +14,14 @@ const approvedDriverStatus = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-export const driverController = { approvedDriverStatus };
+const setAvailable = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?.userId;
+  const result = await driverService.setAvailable(userId);
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.OK,
+    message: `Status update successful`,
+    data: result,
+  });
+});
+export const driverController = { approvedDriverStatus, setAvailable };

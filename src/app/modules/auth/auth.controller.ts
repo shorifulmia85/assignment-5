@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import { StatusCodes } from "http-status-codes";
 import { authService } from "./auth.service";
 import { authCookie, clearCookie } from "../../utils/authCookie";
-import { envVars } from "../../config/env";
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   const user = await authService.createUser(req.body);

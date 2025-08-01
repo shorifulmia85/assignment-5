@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RidesRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const auth_interface_1 = require("../auth/auth.interface");
+const rides_controller_1 = require("./rides.controller");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const rides_validation_1 = require("./rides.validation");
+const router = (0, express_1.Router)();
+router.get("/me", (0, checkAuth_1.checkAuth)(auth_interface_1.Role.RIDER, auth_interface_1.Role.DRIVER), rides_controller_1.ridesController.getMyRides);
+router.get("/", (0, checkAuth_1.checkAuth)(auth_interface_1.Role.ADMIN, auth_interface_1.Role.DRIVER), rides_controller_1.ridesController.getAllRides);
+router.get("/:id", (0, checkAuth_1.checkAuth)(auth_interface_1.Role.ADMIN), rides_controller_1.ridesController.getSingleRide);
+router.post("/requested", (0, checkAuth_1.checkAuth)(auth_interface_1.Role.RIDER), (0, validateRequest_1.validateRequest)(rides_validation_1.requestedRideZodSchema), rides_controller_1.ridesController.requestRide);
+router.patch("/:id/status", (0, checkAuth_1.checkAuth)(...Object.values(auth_interface_1.Role)), (0, validateRequest_1.validateRequest)(rides_validation_1.updateRide), rides_controller_1.ridesController.updateRide);
+exports.RidesRoutes = router;

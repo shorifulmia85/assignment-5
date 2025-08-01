@@ -10,4 +10,5 @@ router.patch(
   checkAuth(Role.ADMIN),
   driverController.approvedDriverStatus
 );
+router.patch("/status", checkAuth(Role.DRIVER), driverController.setAvailable);
 export const DriverRoutes = router;
